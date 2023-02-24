@@ -9,22 +9,15 @@ class AuthServices {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final FirestoreServices _firestoreServices = FirestoreServices();
 
-
-
   Stream<RUser> asyncMap(Stream<User?> stream) async* {
-  await for (final element in stream) {
-    final result = await _firestoreServices.uidToRUser(element!.uid);
-    yield result;
+    await for (final element in stream) {
+      final result = await _firestoreServices.uidToRUser(element!.uid);
+      yield result;
+    }
   }
-}
 
- Stream<RUser> get rUserStream  => asyncMap(_auth.authStateChanges()); 
-  
-  // .map(
-  //   (user) {
-  //     _firestoreServices.uidToRUser(user!.uid);
-  //   },
-  // );
+  Stream<RUser> get rUserStream => asyncMap(_auth.authStateChanges());
+
 
   // log in
   Future<RUser> logInCustomerUsingEmailAndPassword(
@@ -38,13 +31,8 @@ class AuthServices {
     UserCredential creds = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
     rUser = await _firestoreServices.uidToRUser(creds.user!.uid);
-    // print("Sending The User Via Stream");
-
-    // print("User Sent Via Stream");
-
     print(
-      "User Logged in With UID : ${creds.user != null ? creds.user!.uid : "Error"}",
-    );
+        "User Logged in With UID : ${creds.user != null ? creds.user!.uid : "Error"}");
     print(rUser.name);
     return rUser;
   }

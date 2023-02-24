@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vjti/Modals/RUser.dart';
+import 'package:vjti/Services/Authservices.dart';
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({super.key});
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final AuthServices _authServices = AuthServices();
+  LogInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +20,7 @@ class LogInPage extends StatelessWidget {
               const Align(
                 alignment: Alignment.center,
                 child: Image(
-                  image:
-                      AssetImage("assets/Images/Authentication_BG_Image.png"),
+                  image: AssetImage("assets/Images/Hospital_BG.png"),
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -37,7 +41,9 @@ class LogInPage extends StatelessWidget {
                   ),
                   const Spacer(),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
+                      label: const Text("Email"),
                       hintText: "Enter Email",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -48,7 +54,10 @@ class LogInPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextField(
+                    controller: _passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
+                      label: const Text("Password"),
                       hintText: "Enter Password",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -74,7 +83,13 @@ class LogInPage extends StatelessWidget {
                               backgroundColor: Colors.deepPurple,
                               elevation: 4,
                               shadowColor: Color.fromARGB(255, 34, 29, 62)),
-                          onPressed: () {},
+                          onPressed: () async {
+                            RUser rUser = await _authServices
+                                .logInCustomerUsingEmailAndPassword(
+                              _emailController.text.trim(),
+                              _passwordController.text.trim(),
+                            );
+                          },
                           child: const Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 8),
@@ -85,9 +100,6 @@ class LogInPage extends StatelessWidget {
                           )),
                     ],
                   ),
-                  // const Spacer(
-                  //   flex: 2,
-                  // )
                 ],
               ),
             ],
