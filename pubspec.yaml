@@ -43,6 +43,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   gender_picker: ^1.1.0
   intl_phone_number_input: ^0.7.2
+  url_launcher: ^6.0.9
 
 dev_dependencies:
   flutter_test:

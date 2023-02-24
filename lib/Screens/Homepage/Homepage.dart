@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, deprecated_member_use, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:vjti/Screens/DoctorList/DoctorList.dart';
 import 'package:vjti/Screens/Homepage/Models/HospitalDetails.dart';
+import 'package:vjti/Screens/Homepage/Models/OnlineMedication.dart';
 import 'Models/specialisation.dart';
 import 'package:vjti/Colors/color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,16 +27,34 @@ class _HomePageState extends State<HomePage> {
     specialisation('assets/Specialisation/Pulmonology.jpg', 'Pulmonology'),
   ];
 
-  List<String> pharma = [
-    "assets/OnlineMedication/TrueMeds.jpg",
-    'assets/OnlineMedication/Pharmeasy.jpg',
-    'assets/OnlineMedication/netmeds.jpg'
+  List<Pharmacy> pharma = [
+    Pharmacy(
+        img: "assets/OnlineMedication/TrueMeds.jpg",
+        site: 'https://www.1mg.com/'),
+    Pharmacy(
+        img: 'assets/OnlineMedication/Pharmeasy.jpg',
+        site: 'https://pharmeasy.in/'),
+    Pharmacy(
+        img: 'assets/OnlineMedication/netmeds.jpg',
+        site: 'https://www.netmeds.com/')
   ];
 
   List<Hospitaldetails> hospitaldetails = [
     Hospitaldetails(
         Hospitalname: "Deenanath Mangeshkar",
-        Hospitalimg: 'assets/Hospital/Deenanath.jpg')
+        Hospitalimg: 'assets/Hospital/Deenanath.jpg',
+        Address:
+            'Deenanath Mangeshkar Hospital Road, near Mhatre Bridge, Erandwane, Pune, Maharashtra 411004'),
+    Hospitaldetails(
+        Hospitalname: "Sinhgad Hospital",
+        Hospitalimg: 'assets/Hospital/Sinhgad.jpg',
+        Address:
+            'S. No. 44/1, Vadgaon Budruk, 0ff, Sinhgad Rd, Pune, Maharashtra 411041'),
+    Hospitaldetails(
+        Hospitalname: "Sahyadri Hospital",
+        Hospitalimg: 'assets/Hospital/Sahyadri.jpg',
+        Address:
+            'Plot No. 30-C, Erandvane, Karve Rd, Deccan Gymkhana, Pune, Maharashtra 411004'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -97,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
-                                              'assets/Hospital/Deenanath.jpg'),
+                                              '${hospitaldetails[index].Hospitalimg}'),
                                         ),
                                         borderRadius: BorderRadius.circular(20),
                                       ),
@@ -105,13 +126,52 @@ class _HomePageState extends State<HomePage> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text(
-                                      "${hospitaldetails[index].Hospitalname}",
-                                      style: TextStyle(fontSize: 12),
-                                      softWrap: true,
+                                    Column(
+                                      children: [
+                                        Text(
+                                          "${hospitaldetails[index].Hospitalname}",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          softWrap: true,
+                                        ),
+                                        Text(
+                                          "General Hospital",
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold),
+                                          softWrap: true,
+                                        ),
+                                        RatingBar.builder(
+                                            initialRating: 2,
+                                            minRating: 1,
+                                            itemCount: 5,
+                                            itemPadding: EdgeInsets.all(2),
+                                            itemSize: 20,
+                                            itemBuilder: (context, index) =>
+                                                Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                ),
+                                            onRatingUpdate: (rating) =>
+                                                debugPrint(rating.toString())),
+                                      ],
                                     )
                                   ],
-                                )
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  '${hospitaldetails[index].Address}',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontStyle: FontStyle.italic),
+                                ),
                               ],
                             ),
                           ),
@@ -201,12 +261,21 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(15),
                           width: MediaQuery.of(context).size.width * 0.8,
                           decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('${pharma[index]}'),
-                                fit: BoxFit.contain),
+                            // image: DecorationImage(
+                            //     image: AssetImage('${pharma[index]}'),
+                            //     fit: BoxFit.contain),
                             color: kDarkBlue,
                             borderRadius: BorderRadius.circular(12),
                           ),
+                          child: ElevatedButton(
+                              onPressed: () async {
+                                if (await canLaunch('${pharma[index].site}')) {
+                                  launch('${pharma[index].site}');
+                                } else {
+                                  throw 'Could not launch https://www.example.com';
+                                }
+                              },
+                              child: Image.asset("${pharma[index].img}")),
                         );
                       }),
                 )
