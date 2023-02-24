@@ -14,9 +14,9 @@ class _DoctorDetailsInputScreenState extends State<DoctorDetailsInputScreen> {
   final _educationController = TextEditingController();
 
 
-  List<String> _genders = ['Male', 'Female', 'Other'];
-  List<String> _hospitals = ['Hospital A', 'Hospital B', 'Hospital C'];
-  List<String> _specializations = [
+ final List<String> _genders = ['Male', 'Female', 'Other'];
+ final List<String> _hospitals = ['Hospital A', 'Hospital B', 'Hospital C'];
+ final List<String> _specializations = [
     'Cardiologist',
     'Dermatologist',
     'Pediatrician',
