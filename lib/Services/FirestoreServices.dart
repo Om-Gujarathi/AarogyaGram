@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:vjti/Modals/Doctors.dart';
 
 import '../Modals/RUser.dart';
 import '../Modals/Slots.dart';
-
 
 class FirestoreServices {
   final FirebaseFirestore _dataBase = FirebaseFirestore.instance;
@@ -44,16 +44,21 @@ class FirestoreServices {
           // .orderBy("time", descending: isDescending)
           .snapshots();
 
-  void bookAppointment(String doctorUID, DateTime dateTime, String patientUID,
-      bool paymentStatus) {
-    // _dataBase.collection("appointments").where("patientsUID",isEqualTo: "patientUID");
-    // TODO slots need to be made unavailable
+  Stream<QuerySnapshot<Map<String, dynamic>>> getDoctors(
+          String specialisation) =>
+      _dataBase
+          .collection("Doctor")
+          .where("Specialisation", isEqualTo: specialisation)
+          .snapshots();
+
+  void bookAppointment(String doctorUID, DateTime dateTime,
+      Map<String, dynamic> patientData, String rUserPatientUID) {
     _dataBase.collection("appointments").add({
-      "patientUID": patientUID,
       "doctorUID": doctorUID,
+      "rUserPatientUID": rUserPatientUID,
+      "patientData": patientData,
       "time": dateTime,
-      "paymentStatus": paymentStatus,
-      "appointmentCompleted": false
+      "isCompleted": false
     });
   }
 
@@ -63,7 +68,7 @@ class FirestoreServices {
     // Adding Info to Hospital collection
     DocumentReference<Map<String, dynamic>> hospital =
         await _dataBase.collection("hospitals").add({
-          "name":hospitalName,
+      "name": hospitalName,
       "createdBy": adminUID,
       "doctors": [adminUID],
       "time": now,
@@ -76,19 +81,36 @@ class FirestoreServices {
     });
   }
 
-  void addDoctorInHospital(
-      String hospitalUID, String doctorUID) async {
+  Future<Doctor> createDoctor(
+    String? uid,
+    String? name,
+    String? hospital_Name,
+    int? experience,
+    String? specialisation,
+    String? photo,
+  ) async =>
+      // Adding Info to Doctor collection
+      _dataBase.collection("Doctor").add({
+        "doctorUID": uid,
+        "Name": name,
+        "Hospital_Name": hospital_Name,
+        "Experience": experience,
+        "Specialisation": specialisation,
+        "Photo": photo,
+      }).then((value) async {
+        final doctorData = await value.get();
+        return Doctor.fromJSON(doctorData.data(), value.id);
+      });
 
-      _dataBase.collection("hospitals").doc(hospitalUID).update({
-      "doctors" : FieldValue.arrayUnion([doctorUID])
+  void addDoctorInHospital(String hospitalUID, String doctorUID) async {
+    _dataBase.collection("hospitals").doc(hospitalUID).update({
+      "doctors": FieldValue.arrayUnion([doctorUID])
     });
 
-      _dataBase.collection("RUser").doc(doctorUID).update({
+    _dataBase.collection("RUser").doc(doctorUID).update({
       "Hospital": FieldValue.arrayUnion([hospitalUID])
     });
-
   }
-  
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getSlots(String doctorUID,
           {bool isDescending = false}) =>
