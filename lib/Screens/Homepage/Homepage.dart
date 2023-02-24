@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:vjti/Screens/DoctorList/DoctorList.dart';
+import 'package:vjti/Screens/Homepage/Models/HospitalDetails.dart';
 import 'Models/specialisation.dart';
 import 'package:vjti/Colors/color.dart';
 
@@ -21,6 +22,18 @@ class _HomePageState extends State<HomePage> {
     specialisation('assets/Specialisation/Oral_Health.jpg', 'Dentist'),
     specialisation('assets/Specialisation/Otology.jpg', 'Otology'),
     specialisation('assets/Specialisation/Pulmonology.jpg', 'Pulmonology'),
+  ];
+
+  List<String> pharma = [
+    "assets/OnlineMedication/TrueMeds.jpg",
+    'assets/OnlineMedication/Pharmeasy.jpg',
+    'assets/OnlineMedication/netmeds.jpg'
+  ];
+
+  List<Hospitaldetails> hospitaldetails = [
+    Hospitaldetails(
+        Hospitalname: "Deenanath Mangeshkar",
+        Hospitalimg: 'assets/Hospital/Deenanath.jpg')
   ];
   @override
   Widget build(BuildContext context) {
@@ -49,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                   height: MediaQuery.of(context).size.height * 0.325,
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: 10,
+                      itemCount: hospitaldetails.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
@@ -67,6 +80,27 @@ class _HomePageState extends State<HomePage> {
                             ),
                             color: kLighterGreen,
                             borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.09,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.18,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              '${hospitaldetails[index].Hospitalimg}'),
+                                          fit: BoxFit.contain),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: kDarkBlue),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       }),
@@ -111,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                   '${Spec[index].url}',
                                   fit: BoxFit.cover,
                                 ),
-                                iconSize: 35,
+                                iconSize: 40,
                               ),
                               Text(
                                 '${Spec[index].spec}',
@@ -131,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Center(
                     child: Text(
-                      "Recommended Doctors",
+                      "Online Pharmacy",
                       style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -146,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                   height: MediaQuery.of(context).size.height * 0.25,
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: 5,
+                      itemCount: pharma.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
@@ -154,61 +188,12 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(15),
                           width: MediaQuery.of(context).size.width * 0.8,
                           decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage('${pharma[index]}'),
+                                fit: BoxFit.contain),
                             color: kDarkBlue,
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Column(children: [
-                            Row(
-                              children: [
-                                Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.1,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
-                                    decoration: BoxDecoration(
-                                      // color: Colors.black,
-                                      borderRadius: BorderRadius.circular(25),
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpXPyXbPKBb4oyJGgtHpo7c24w_7o2mbBENJlVUoiGv7tB7sqnl4bjAvNijfGwyT3-Ass&usqp=CAU")),
-                                    )),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                ),
-                                Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "data",
-                                        style: TextStyle(
-                                            color: kWhite,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "data",
-                                        style: TextStyle(
-                                            color: kWhite, fontSize: 15),
-                                      ),
-                                      Text(
-                                        "data ",
-                                        style: TextStyle(
-                                            color: kWhite, fontSize: 15),
-                                      ),
-                                    ])
-                              ],
-                            ),
-                            Divider(
-                              color: kWhite,
-                            ),
-                            SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.005,
-                            ),
-                          ]),
                         );
                       }),
                 )
