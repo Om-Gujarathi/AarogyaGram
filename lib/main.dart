@@ -3,6 +3,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AuthenticationScreens/LogInScreen.dart';
+import 'package:vjti/Screens/Doctor%20Notification/DocNotif.dart';
+import 'package:vjti/Screens/Homepage/Homepage.dart';
 import 'package:vjti/Screens/NavBar/BottomNavBar.dart';
 
 import 'Modals/RUser.dart';
@@ -37,24 +39,27 @@ class MyApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home:
-          // LogInPage()
-
-          StreamBuilder<RUser>(
-              stream: AuthServices().rUserStream,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final RUser? rUser = snapshot.data;
-                  if (snapshot.data!.role == "P") {
-                    return MyBottomNavigationBar();
-                    // return DoctorAppointmentScreen();
-                  } else if (snapshot.data!.role == "D") {
-                    // return EntryPoint(rUser: rUser!);
-                    return Container();
-                  }
-                }
-                return LogInPage();
-              }),
+      home: StreamBuilder<RUser>(
+          stream: AuthServices().rUserStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final RUser? rUser = snapshot.data;
+              if (snapshot.data!.role == "P") {
+                // return Container();
+                return DocNotification();
+                // return DoctorAppointmentScreen();
+              } else if (snapshot.data!.role == "C") {
+                // return EntryPoint(rUser: rUser!);
+                // return Container();
+                return HomePage();
+              }
+            }
+            // return const LogInPage();
+            return HomePage();
+          }),
+      // home: Scaffold(
+      //   body: Center(child: Text('HI')),
+      // ),
     );
   }
 }
