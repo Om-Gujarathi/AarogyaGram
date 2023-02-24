@@ -8,14 +8,16 @@ const Color kMildgreen = Color.fromARGB(255, 160, 228, 203);
 const Color kGreenishBlue = Color.fromARGB(255, 89, 193, 190);
 const Color kDarkBlue = Color.fromARGB(255, 13, 75, 146);
 
+const Color kBlack = Colors.black;
+
 final kPoppinsBold =
-    GoogleFonts.poppins(color: kDarkBlue, fontWeight: FontWeight.w700);
+    GoogleFonts.poppins(color: kBlack, fontWeight: FontWeight.w700);
 
 final kPoppinsSemiBold =
-    GoogleFonts.poppins(color: kDarkBlue, fontWeight: FontWeight.w600);
+    GoogleFonts.poppins(color: kBlack, fontWeight: FontWeight.w600);
 
 final kPoppinsMedium =
-    GoogleFonts.poppins(color: kDarkBlue, fontWeight: FontWeight.w500);
+    GoogleFonts.poppins(color: kBlack, fontWeight: FontWeight.w500);
 
 final kPoppinsRegular =
-    GoogleFonts.poppins(color: kDarkBlue, fontWeight: FontWeight.w400);
+    GoogleFonts.poppins(color: kBlack, fontWeight: FontWeight.w400);
