@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return Container(
                           margin: EdgeInsets.all(8),
-                          padding: EdgeInsets.all(15),
+                          padding: EdgeInsets.all(12),
                           height: 304,
                           width: 255,
                           decoration: BoxDecoration(
@@ -82,22 +82,35 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.09,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.18,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
+                                Row(
+                                  children: [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.09,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.18,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
                                           image: AssetImage(
-                                              '${hospitaldetails[index].Hospitalimg}'),
-                                          fit: BoxFit.contain),
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: kDarkBlue),
+                                              'assets/Hospital/Deenanath.jpg'),
+                                        ),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "${hospitaldetails[index].Hospitalname}",
+                                      style: TextStyle(fontSize: 12),
+                                      softWrap: true,
+                                    )
+                                  ],
                                 )
                               ],
                             ),
