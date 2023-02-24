@@ -38,6 +38,11 @@ dependencies:
   firebase_auth: ^4.2.9
   firebase_storage: ^11.0.14
   firebase_core: ^2.7.0
+  font_awesome_flutter: ^10.4.0
+  google_fonts: ^4.0.3
+  flutter_rating_bar: ^4.0.1
+  gender_picker: ^1.1.0
+  intl_phone_number_input: ^0.7.2
 
 dev_dependencies:
   flutter_test:

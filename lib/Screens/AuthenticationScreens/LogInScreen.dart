@@ -48,6 +48,7 @@ class LogInPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Enter Password",
                       border: OutlineInputBorder(
