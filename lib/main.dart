@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AuthenticationScreens/LogInScreen.dart';
 
 import 'Modals/RUser.dart';
-import 'Screens/FlutterSound.dart';
 import 'Services/Authservices.dart';
 
 Future<void> main() async {
@@ -21,6 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFEEF1F8),
@@ -39,16 +39,16 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder<RUser>(
           stream: AuthServices().rUserStream,
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final RUser? rUser = snapshot.data;
-              if (snapshot.data!.role == "P") {
-                return AudioRecorder();
-                // return DoctorAppointmentScreen();
-              } else if (snapshot.data!.role == "D") {
-                // return EntryPoint(rUser: rUser!);
-                return Container();
-              }
-            }
+            // if (snapshot.hasData) {
+            //   final RUser? rUser = snapshot.data;
+            //   if (snapshot.data!.role == "P") {
+            //     return Container();
+            //     // return DoctorAppointmentScreen();
+            //   } else if (snapshot.data!.role == "D") {
+            //     // return EntryPoint(rUser: rUser!);
+            //     return Container();
+            //   }
+            // }
             return LogInPage();
           }),
     );

@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:vjti/Modals/RUser.dart';
+import 'package:vjti/Screens/AuthenticationScreens/PatientSignupScreen.dart';
 import 'package:vjti/Services/Authservices.dart';
 
 class LogInPage extends StatelessWidget {
@@ -39,6 +42,7 @@ class LogInPage extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontFamily: "AppName"),
                   ),
+
                   const Spacer(),
                   TextField(
                     controller: _emailController,
@@ -71,7 +75,14 @@ class LogInPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PatientSignInPage(),
+                            ),
+                          );
+                        },
                         child: const Text(
                           "Don't have an account?",
                           style: TextStyle(
