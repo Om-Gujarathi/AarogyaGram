@@ -36,7 +36,7 @@ class LogInPage extends StatelessWidget {
                       child:
                           Text("Welcome to ", style: TextStyle(fontSize: 28))),
                   const Text(
-                    "Arogyagram",
+                    "Arogyaग्राम",
                     style: TextStyle(
                         fontSize: 65,
                         fontWeight: FontWeight.w400,
