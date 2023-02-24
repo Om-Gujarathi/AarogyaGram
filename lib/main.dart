@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                 if (snapshot.hasData) {
                   final RUser? rUser = snapshot.data;
                   if (snapshot.data!.role == "P") {
-                    return Text("Logged in");
+                    return MyBottomNavigationBar();
                     // return DoctorAppointmentScreen();
                   } else if (snapshot.data!.role == "D") {
                     // return EntryPoint(rUser: rUser!);

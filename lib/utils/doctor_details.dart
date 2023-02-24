@@ -13,19 +13,24 @@ class _DoctorDetailsInputScreenState extends State<DoctorDetailsInputScreen> {
   final _experienceController = TextEditingController();
   final _educationController = TextEditingController();
 
-  String _selectedGender = '';
+
   List<String> _genders = ['Male', 'Female', 'Other'];
-
-  String _selectedHospital = '';
   List<String> _hospitals = ['Hospital A', 'Hospital B', 'Hospital C'];
-
-  String _selectedSpecialization = '';
   List<String> _specializations = [
     'Cardiologist',
     'Dermatologist',
     'Pediatrician',
     'Psychiatrist'
   ];
+
+  String _selectedGender = '';
+  List<DropdownMenuItem<String>>? _genderDropdownItems;
+
+  String _selectedHospital = '';
+  List<DropdownMenuItem<String>>? _hospitalDropdownItems;
+
+  String _selectedSpecialization = '';
+  List<DropdownMenuItem<String>>? _specializationDropdownItems;
 
   @override
   void dispose() {
@@ -42,6 +47,37 @@ class _DoctorDetailsInputScreenState extends State<DoctorDetailsInputScreen> {
       // Perform save operation here
       Navigator.pop(context);
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _selectedGender = _genders.first;
+     _genderDropdownItems = _genders.map((gender) {
+      return DropdownMenuItem<String>(
+        value: gender,
+        child: Text(gender),
+      );
+    }).toList();
+
+    _selectedHospital = _hospitals.first;
+    _hospitalDropdownItems = _genders.map((hospital) {
+      return DropdownMenuItem<String>(
+        value: hospital,
+        child: Text(hospital),
+      );
+    }).toList();
+
+
+
+    _selectedSpecialization = _specializations.first;
+    _specializationDropdownItems = _genders.map((specialization) {
+      return DropdownMenuItem<String>(
+        value: specialization,
+        child: Text(specialization),
+      );
+    }).toList();
   }
 
   @override
@@ -126,12 +162,7 @@ class _DoctorDetailsInputScreenState extends State<DoctorDetailsInputScreen> {
                     _selectedGender = value!;
                   });
                 },
-                items: _genders.map((gender) {
-                  return DropdownMenuItem<String>(
-                    value: gender,
-                    child: Text(gender),
-                  );
-                }).toList(),
+                items: _genderDropdownItems,
                 decoration: InputDecoration(
                   labelText: 'Gender',
                 ),
@@ -163,12 +194,7 @@ class _DoctorDetailsInputScreenState extends State<DoctorDetailsInputScreen> {
                     _selectedHospital = value!;
                   });
                 },
-                items: _hospitals.map((hospital) {
-                  return DropdownMenuItem<String>(
-                    value: hospital,
-                    child: Text(hospital),
-                  );
-                }).toList(),
+                items: _hospitalDropdownItems,
                 decoration: InputDecoration(
                   labelText: 'Hospital Name',
                 ),
@@ -187,12 +213,7 @@ class _DoctorDetailsInputScreenState extends State<DoctorDetailsInputScreen> {
                     _selectedSpecialization = value!;
                   });
                 },
-                items: _specializations.map((specialization) {
-                  return DropdownMenuItem<String>(
-                    value: specialization,
-                    child: Text(specialization),
-                  );
-                }).toList(),
+                items: _specializationDropdownItems,
                 decoration: InputDecoration(
                   labelText: 'Specialization',
                 ),

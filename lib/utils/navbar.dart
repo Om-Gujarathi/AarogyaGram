@@ -1,57 +1,57 @@
-import 'package:flutter/material.dart';
-
-
-class InstagramNavigationBar extends StatefulWidget {
-  @override
-  _InstagramNavigationBarState createState() => _InstagramNavigationBarState();
-}
-
-class _InstagramNavigationBarState extends State<InstagramNavigationBar> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _pages = <Widget>[    Text('Home'),    Text('Search'),    Text('Add'),    Text('Notifications'),    Text('Profile')  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _pages.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
-  }
-}
+//
+// import 'package:flutter/material.dart';
+// import 'package:untitled/doctor_details.dart';
+// import 'package:untitled/main.dart';
+//
+// class MyBottomNavigationBar extends StatefulWidget {
+//   @override
+//   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+// }
+//
+// class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
+//   int _selectedIndex = 0;
+//   static List<Widget> _widgetOptions = <Widget>[    HomePage(),    DoctorDetailsInputScreen(),    HomePage(),    AddReminderPage(),    DoctorDetailsInputScreen(),  ];
+//
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       _selectedIndex = index;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: _widgetOptions.elementAt(_selectedIndex),
+//       ),
+//       bottomNavigationBar: BottomNavigationBar(
+//         items: const <BottomNavigationBarItem>[
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.home),
+//             label: 'Home',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.search),
+//             label: 'Search',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.notifications),
+//             label: 'Notifications',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.person),
+//             label: 'Profile',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: Icon(Icons.settings),
+//             label: 'Settings',
+//           ),
+//         ],
+//         currentIndex: _selectedIndex,
+//         selectedItemColor: Colors.blue,
+//         unselectedItemColor: Colors.black,
+//         unselectedLabelStyle: TextStyle(color: Colors.black),
+//         onTap: _onItemTapped,
+//       ),
+//     );
+//   }
