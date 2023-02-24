@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../Modals/Slots.dart';
+import '../Screens/constants.dart';
 import '../Services/FirestoreServices.dart';
 
 class DoctorAppointmentScreen extends StatelessWidget {
@@ -24,10 +25,10 @@ class DoctorAppointmentScreen extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kLighterGreen, kGreenishBlue, kDarkBlue],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    )),
+                  colors: [kLighterGreen, kGreenishBlue, kDarkBlue],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                )),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,16 +129,18 @@ class DoctorAppointmentScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [kWhite, kLighterGreen, kLighterGreen],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  )),
+                colors: [kWhite, kLighterGreen, kLighterGreen],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+              )),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 15,),
+                    SizedBox(
+                      height: 15,
+                    ),
                     Text(
                       "DOCTOR'S NAME",
                       style: TextStyle(
@@ -173,7 +176,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width/1.8,
+                          width: MediaQuery.of(context).size.width / 1.8,
                           child: Text(
                             "Address of the doctor's clinic or the hospital address",
                             style: TextStyle(
@@ -183,21 +186,23 @@ class DoctorAppointmentScreen extends StatelessWidget {
                             textAlign: TextAlign.justify,
                           ),
                         ),
-                        SizedBox(width: 20,),
-                        Expanded(child: Container(
-                          child: TextFormField(
-                            onChanged: (value) => print(value),
-                            cursorWidth: 6,
-                            keyboardType:
-                            TextInputType.datetime,
-                            decoration: const InputDecoration(
-                                contentPadding: EdgeInsets.all(20),
-                                hintText: "Enter date",
-                                prefixIcon:
-                                Icon(Icons.date_range),
-                                prefixIconColor: Colors.black),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: TextFormField(
+                              onChanged: (value) => print(value),
+                              cursorWidth: 6,
+                              keyboardType: TextInputType.datetime,
+                              decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(20),
+                                  hintText: "Enter date",
+                                  prefixIcon: Icon(Icons.date_range),
+                                  prefixIconColor: Colors.black),
+                            ),
                           ),
-                        ),)
+                        )
                       ],
                     ),
                     const SizedBox(
@@ -208,9 +213,10 @@ class DoctorAppointmentScreen extends StatelessWidget {
                             .getSlots("53OaamMvIXhUzbZqWn5b41JMmAg2"),
                         builder: (context, snapshot) {
                           QuerySnapshot<Map<String, dynamic>> data =
-                          snapshot.data!;
+                              snapshot.data!;
                           // print(data.docs[0].data());
-                          if (snapshot.connectionState == ConnectionState.waiting)
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting)
                             return CircularProgressIndicator();
                           if (snapshot.hasData) {
                             return SizedBox(
@@ -223,9 +229,9 @@ class DoctorAppointmentScreen extends StatelessWidget {
                                   padding: const EdgeInsets.all(16.0),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-
                                       Text(snapshot.data!.size.toString() +
                                           " slots"),
                                       SizedBox(
@@ -233,8 +239,9 @@ class DoctorAppointmentScreen extends StatelessWidget {
                                       ),
                                       SizedBox(
                                         height: 50,
-                                        width: MediaQuery.of(context).size.width *
-                                            0.8,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.8,
                                         child: Expanded(
                                           child: ListView.builder(
                                               itemCount: snapshot.data!.size,
@@ -249,17 +256,18 @@ class DoctorAppointmentScreen extends StatelessWidget {
                                                 return GestureDetector(
                                                   onTap: () {},
                                                   child: Container(
-                                                    margin: const EdgeInsets.only(
-                                                        right: 8),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            right: 8),
                                                     height: 50,
                                                     width: 100,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                        BorderRadius.circular(
-                                                            3),
+                                                            BorderRadius
+                                                                .circular(3),
                                                         border: Border.all(
-                                                            color:
-                                                            slot.isAvailable
+                                                            color: slot
+                                                                    .isAvailable
                                                                 ? Colors.blue
                                                                 : Colors.grey,
                                                             width: 2)),
@@ -269,10 +277,10 @@ class DoctorAppointmentScreen extends StatelessWidget {
                                                         "${slot.time.hour} : ${slot.time.minute}",
                                                         // slot["time"].toString(),
                                                         textAlign:
-                                                        TextAlign.center,
+                                                            TextAlign.center,
                                                         style: TextStyle(
-                                                            color:
-                                                            slot.isAvailable
+                                                            color: slot
+                                                                    .isAvailable
                                                                 ? Colors.blue
                                                                 : Colors.grey,
                                                             fontSize: 18),
@@ -301,8 +309,8 @@ class DoctorAppointmentScreen extends StatelessWidget {
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(15),
                       child: InkWell(
-                        onTap: () async{
-                          print(await LocationServices().getcoordinates());
+                        onTap: () async {
+                          // print(await LocationServices().getcoordinates());
                           // FirestoreServices().addDoctorInHospital(
                           //     "4v1ym2pn9FZM57lclqOt", "doctorUID");
                           // FirestoreServices().createHostipal(

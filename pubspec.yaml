@@ -45,7 +45,7 @@ dependencies:
   permission_handler: ^9.0.0
   permission_handler_android: ^9.0.2+1
   flutter_local_notifications: ^13.0.0
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.18
 
 dev_dependencies:
   flutter_test:

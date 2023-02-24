@@ -13,9 +13,6 @@ class _InstagramNavigationBarState extends State<InstagramNavigationBar> {
 
   void _onItemTapped(int index) {
     setState(() {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context){
-        return HomePage();
-      }));
     });
   }
 
