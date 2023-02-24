@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/doctor_details.dart';
-import 'package:untitled/main.dart';
+import 'package:vjti/utils/medicine_reminder.dart';
+
+import 'doctor_details.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[    HomePage(),    DoctorDetailsInputScreen(),    HomePage(),    AddReminderPage(),    DoctorDetailsInputScreen(),  ];
+  static List<Widget> _widgetOptions = <Widget>[    AddReminderPage(),    DoctorDetailsInputScreen(),    Medicine_Reminder(),    AddReminderPage(),    DoctorDetailsInputScreen(),  ];
 
   void _onItemTapped(int index) {
     setState(() {

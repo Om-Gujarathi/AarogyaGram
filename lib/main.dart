@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AuthenticationScreens/LogInScreen.dart';
 import 'package:vjti/Screens/NavBar/BottomNavBar.dart';
+import 'package:vjti/utils/navbar.dart';
 
 import 'Modals/RUser.dart';
 import 'Services/Authservices.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               final RUser? rUser = snapshot.data;
               if (snapshot.data!.role == "P") {
-                return BottomBar();
+                return MyBottomNavigationBar();
                 // return DoctorAppointmentScreen();
               } else if (snapshot.data!.role == "D") {
                 // return EntryPoint(rUser: rUser!);

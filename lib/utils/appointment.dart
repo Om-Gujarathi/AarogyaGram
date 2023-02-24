@@ -10,7 +10,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: kWhite,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -24,7 +24,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [kLighterGreen, kGreenishBlue, kDarkBlue],
+                      colors: [Colors.green, Colors.redAccent, Colors.blue],
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                     )),
@@ -128,7 +128,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [kWhite, kLighterGreen, kLighterGreen],
+                    colors: [Colors.green, Colors.redAccent, Colors.blue],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   )),
@@ -302,7 +302,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       child: InkWell(
                         onTap: () async{
-                          print(await LocationServices().getcoordinates());
+                          // print(await LocationServices().getcoordinates());
                           // FirestoreServices().addDoctorInHospital(
                           //     "4v1ym2pn9FZM57lclqOt", "doctorUID");
                           // FirestoreServices().createHostipal(
