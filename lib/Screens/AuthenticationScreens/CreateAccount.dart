@@ -20,7 +20,7 @@ class CreateAccountScreen extends StatelessWidget {
               children: <Widget>[
                 SizedBox(height: 20.0),
                 Image.asset(
-                  'assets/images/patient.png',
+                  'assets/Images/Patient_BG.png',
                   height: 150.0,
                 ),
                 SizedBox(height: 20.0),

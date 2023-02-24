@@ -3,8 +3,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AuthenticationScreens/LogInScreen.dart';
+import 'package:vjti/Screens/NavBar/BottomNavBar.dart';
 
 import 'Modals/RUser.dart';
+import 'Screens/FlutterSound.dart';
 import 'Services/Authservices.dart';
 
 Future<void> main() async {
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFEEF1F8),
@@ -41,18 +44,15 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               final RUser? rUser = snapshot.data;
               if (snapshot.data!.role == "P") {
-                return Container();
+                return BottomBar();
                 // return DoctorAppointmentScreen();
-              } else if (snapshot.data!.role == "C") {
+              } else if (snapshot.data!.role == "D") {
                 // return EntryPoint(rUser: rUser!);
                 return Container();
               }
             }
-            return const LogInPage();
+            return LogInPage();
           }),
-      // home: Scaffold(
-      //   body: Center(child: Text('HI')),
-      // ),
     );
   }
 }
