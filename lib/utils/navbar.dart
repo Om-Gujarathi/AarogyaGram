@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:untitled/doctor_details.dart';
 import 'package:untitled/main.dart';
@@ -54,4 +55,3 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
       ),
     );
   }
-}

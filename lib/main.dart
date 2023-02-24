@@ -37,21 +37,24 @@ class MyApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: StreamBuilder<RUser>(
-          stream: AuthServices().rUserStream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final RUser? rUser = snapshot.data;
-              if (snapshot.data!.role == "P") {
-                return BottomBar();
-                // return DoctorAppointmentScreen();
-              } else if (snapshot.data!.role == "D") {
-                // return EntryPoint(rUser: rUser!);
-                return Container();
-              }
-            }
-            return LogInPage();
-          }),
+      home:
+          // LogInPage()
+
+          StreamBuilder<RUser>(
+              stream: AuthServices().rUserStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final RUser? rUser = snapshot.data;
+                  if (snapshot.data!.role == "P") {
+                    return Text("Logged in");
+                    // return DoctorAppointmentScreen();
+                  } else if (snapshot.data!.role == "D") {
+                    // return EntryPoint(rUser: rUser!);
+                    return Container();
+                  }
+                }
+                return LogInPage();
+              }),
     );
   }
 }

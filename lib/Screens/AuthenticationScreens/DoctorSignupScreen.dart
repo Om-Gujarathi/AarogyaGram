@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:vjti/Modals/RUser.dart';
 import 'package:vjti/Services/Authservices.dart';
 
-class PatientSignInPage extends StatefulWidget {
-  PatientSignInPage({super.key});
+class DoctorSignInPage extends StatefulWidget {
+  DoctorSignInPage({super.key});
 
   @override
-  State<PatientSignInPage> createState() => _PatientSignInPageState();
+  State<DoctorSignInPage> createState() => _DoctorSignInPageState();
 }
 
-class _PatientSignInPageState extends State<PatientSignInPage> {
+class _DoctorSignInPageState extends State<DoctorSignInPage> {
   final List<String> _genders = ['Male', 'Female', 'Other'];
   String? _selectedGender;
 
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _phNoController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
   List<DropdownMenuItem<String>>? _genderDropdownItems;
@@ -59,7 +56,7 @@ class _PatientSignInPageState extends State<PatientSignInPage> {
                   height: 100,
                   width: 100,
                   child: Image(
-                    image: AssetImage("assets/Images/Patient_BG.png"),
+                    image: AssetImage("assets/Images/Doctor_BG.png"),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -68,7 +65,7 @@ class _PatientSignInPageState extends State<PatientSignInPage> {
                   height: 10,
                 ),
                 TextField(
-                  controller: _nameController,
+                  controller: _emailController,
                   decoration: InputDecoration(
                     label: const Text("Name"),
                     hintText: "Enter Name",
@@ -83,12 +80,10 @@ class _PatientSignInPageState extends State<PatientSignInPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 130,
                       child: TextField(
-                        controller: _ageController,
-                        decoration:
-                            const InputDecoration(hintText: "Enter your age"),
+                        decoration: InputDecoration(hintText: "Enter your age"),
                       ),
                     ),
                     SizedBox(
@@ -119,19 +114,6 @@ class _PatientSignInPageState extends State<PatientSignInPage> {
                   height: 10,
                 ),
                 // const Spacer(),
-                TextField(
-                  controller: _phNoController,
-                  decoration: InputDecoration(
-                    label: const Text("Phone Number"),
-                    hintText: "Enter Your Phone Number",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
@@ -177,16 +159,10 @@ class _PatientSignInPageState extends State<PatientSignInPage> {
                           elevation: 4,
                           shadowColor: Color.fromARGB(255, 34, 29, 62)),
                       onPressed: () async {
-                        RUser rUser = await _authServices.createPatient(
+                        RUser rUser = await _authServices
+                            .logInCustomerUsingEmailAndPassword(
                           _emailController.text.trim(),
                           _passwordController.text.trim(),
-                          _nameController.text.trim(),
-                          _phNoController.text.trim(),
-                          "P",
-                          _selectedGender!,
-                          int.parse(
-                            _ageController.text.trim(),
-                          ),
                         );
                       },
                       child: const Padding(

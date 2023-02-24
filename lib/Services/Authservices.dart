@@ -18,13 +18,10 @@ class AuthServices {
 
   Stream<RUser> get rUserStream => asyncMap(_auth.authStateChanges());
 
-
   // log in
   Future<RUser> logInCustomerUsingEmailAndPassword(
     String email,
     String password,
-    // String userName,
-    // String phoneNumber,
   ) async {
     RUser rUser;
     // Logging the user in
@@ -38,12 +35,14 @@ class AuthServices {
   }
 
   // Create
-  Future<RUser> createRUserUsingEmailAndPassword(
+  Future<RUser> createPatient(
     String email,
     String password,
     String userName,
     String phoneNumber,
     String role,
+    String gender,
+    int age,
   ) async {
     UserCredential creds = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
@@ -58,13 +57,22 @@ class AuthServices {
     print("Addng...");
 
     // Adding the user<Customer> to our database with doc ID being the FirebaseAuth UID.
-    final docUser = db.collection("RUser").doc(creds.user!.uid.toString());
-    await docUser.set(rUser.toJSON());
+    // final docRUser = db.collection("RUser").doc(creds.user!.uid.toString());
+    final docUser = db.collection("patient").doc(creds.user!.uid.toString());
+    await docUser.set({
+      "uid": rUser.uid,
+      "email": rUser.email,
+      "name": userName,
+      "phoneNumber": phoneNumber,
+      "gender": gender,
+      "age": age,
+    });
+    // await docRUser.set(rUser.toJSON());
 
     return rUser;
   }
 
-  void SignOut() {
+  void signOut() {
     _auth.signOut();
   }
   // Forgot Password
