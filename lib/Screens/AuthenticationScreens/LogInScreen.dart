@@ -30,7 +30,7 @@ class LogInPage extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // const Spacer(),
+                  const Spacer(),
                   const Align(
                       alignment: Alignment.centerLeft,
                       child:
@@ -42,8 +42,9 @@ class LogInPage extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontFamily: "AppName"),
                   ),
-
-                  const Spacer(),
+                  const Spacer(
+                    flex: 4,
+                  ),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
