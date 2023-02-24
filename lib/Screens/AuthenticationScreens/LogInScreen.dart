@@ -15,8 +15,8 @@ class LogInPage extends StatelessWidget {
               const Align(
                 alignment: Alignment.center,
                 child: Image(
-                  image: NetworkImage(
-                      "https://cdn0.iconfinder.com/data/icons/professional-avatar-5/48/Doctor_female_avatar_women_woman_profile_character_professions-512.png"),
+                  image:
+                      AssetImage("assets/Images/Authentication_BG_Image.png"),
                   fit: BoxFit.fitWidth,
                 ),
               ),
