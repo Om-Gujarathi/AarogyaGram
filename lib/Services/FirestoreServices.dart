@@ -88,6 +88,7 @@ class FirestoreServices {
     });
 
   }
+  
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getSlots(String doctorUID,
           {bool isDescending = false}) =>

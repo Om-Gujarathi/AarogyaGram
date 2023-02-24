@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AuthenticationScreens/LogInScreen.dart';
 import 'package:vjti/Screens/Doctor%20Notification/DocNotif.dart';
 import 'package:vjti/Screens/Homepage/Homepage.dart';
+import 'package:vjti/Screens/NavBar/BottomNavBar.dart';
 
 import 'Modals/RUser.dart';
 import 'Services/Authservices.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xFFEEF1F8),
