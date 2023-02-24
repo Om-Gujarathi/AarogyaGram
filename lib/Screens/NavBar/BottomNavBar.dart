@@ -1,23 +1,22 @@
+
 import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AppointmentScreen/AppointmentScreen.dart';
+import 'package:vjti/utils/medicine_reminder.dart';
 
+import '../../utils/doctor_details.dart';
 
-class BottomBar extends StatefulWidget {
+class MyBottomNavigationBar extends StatefulWidget {
   @override
-  _BottomBarState createState() => _BottomBarState();
+  _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
 }
 
-class _BottomBarState extends State<BottomBar> {
+class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
-
-  final List<Widget> _pages = [DoctorAppointmentScreen()];
+  static List<Widget> _widgetOptions = <Widget>[    AddReminderPage(),    DoctorAppointmentScreen(),    Medicine_Reminder(),    AddReminderPage(),    DoctorDetailsInputScreen(),  ];
 
   void _onItemTapped(int index) {
     setState(() {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return _pages[index];
-      }));
+      _selectedIndex = index;
     });
   }
 
@@ -25,15 +24,9 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _pages.elementAt(_selectedIndex),
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -44,18 +37,23 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_box),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
+            icon: Icon(Icons.person),
             label: 'Profile',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.black,
+        unselectedLabelStyle: TextStyle(color: Colors.black),
+        onTap: _onItemTapped,
       ),
     );
   }
