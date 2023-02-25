@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Modals/Slots.dart';
+
 class SlotsCard extends StatefulWidget {
   const SlotsCard({super.key, required this.slot, required this.function});
   final VoidCallback function;
@@ -37,7 +38,7 @@ class _SlotsCardState extends State<SlotsCard> {
         height: 50,
         width: 100,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3),
+            borderRadius: BorderRadius.circular(12),
             border: Border.all(
                 color: isSelected! ? Colors.blue : Colors.grey, width: 2)),
         child: Center(

@@ -269,11 +269,21 @@ class DoctorAppointmentScreen extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         if (_selectedSlot == null) {
-                          SnackBar(
-                            content: Text("No slot selected"),
-                            // content: Text(
-                            //     "Laudya Slots tuza baap select karnar ka?"),
-                          );
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("No Slot Selected"),
+                                  content: Text("Please select the slot"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("ok"))
+                                  ],
+                                );
+                              });
                           return;
                         }
                         try {

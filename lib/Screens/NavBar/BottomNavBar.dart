@@ -18,7 +18,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     EmergencyContacts(),
     Reels(),
     // AddReminderPage(),
-    DoctorDetailsInputScreen(),
+    Medicine_Reminder(),
   ];
 
   void _onItemTapped(int index) {

@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vjti/Colors/color.dart';
 import 'package:vjti/Screens/Reels/SeeReels.dart';
 
 import '../../Services/FirestoreServices.dart';
@@ -21,8 +19,11 @@ class Reels extends StatelessWidget {
       appBar: AppBar(
         title: Text('Reels'),
         centerTitle: true,
+        backgroundColor: kBlack,
       ),
       body: Column(
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _videoLink != null
               ? Container(
@@ -35,7 +36,10 @@ class Reels extends StatelessWidget {
                   await ImagePicker().pickVideo(source: ImageSource.gallery);
               _firestoreServices.storage("uid", _video!);
             },
-            child: const Text("Add Video"),
+            child: const Text(
+              "ADD VIDEO",
+              style: TextStyle(fontSize: 22),
+            ),
           ),
           ElevatedButton(
               onPressed: () async {
@@ -47,7 +51,7 @@ class Reels extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => VideoScreen(videoUrl: videos)));
               },
-              child: Text('SEE REELS')),
+              child: Text('SEE REELS', style: TextStyle(fontSize: 22))),
         ],
       ),
     );

@@ -62,24 +62,27 @@ class _HomePageState extends State<HomePage> {
         debugShowCheckedModeBanner: false,
         home: SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              toolbarHeight: 58,
-              elevation: 10,
-              title: Center(
-                  child: Text(
-                'AAROGYAग्राम',
-                style: TextStyle(fontSize: 28),
-              )),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(24),
-                      bottomRight: Radius.circular(24))),
-              backgroundColor: kDarkBlue,
-              foregroundColor: kLighterGreen,
-            ),
             body: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: Text(
+                      "Aarogyaग्राम",
+                      style: TextStyle(
+                          shadows: [
+                            Shadow(
+                              blurRadius: 3,
+                              color: kDarkBlue,
+                            ),
+                          ],
+                          fontSize: 50,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: "AppName"),
+                    ),
+                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.325,
                     child: ListView.builder(
