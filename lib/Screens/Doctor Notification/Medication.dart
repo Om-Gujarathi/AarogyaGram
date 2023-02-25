@@ -37,7 +37,7 @@ class Patient_MedicationState extends State<PatientMedication> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.person_2_outlined,
+                    Icon(Icons.person,
                         size: 35, color: Colors.grey[700]),
                     const SizedBox(
                       width: 10,

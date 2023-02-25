@@ -31,6 +31,7 @@ class Reels extends StatelessWidget {
                 )
               : Container(),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
             onPressed: () async {
               _video =
                   await ImagePicker().pickVideo(source: ImageSource.gallery);
@@ -42,6 +43,7 @@ class Reels extends StatelessWidget {
             ),
           ),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               onPressed: () async {
                 print("PRESSED");
                 List<dynamic> videos = await _firestoreServices.getVideoUrls();

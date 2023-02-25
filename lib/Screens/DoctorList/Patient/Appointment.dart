@@ -50,7 +50,7 @@ class _PatientDetailsState extends State<PatientDetails> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.person_2_outlined,
+                        Icon(Icons.person,
                             size: 35, color: Colors.grey[700]),
                         const SizedBox(
                           width: 10,

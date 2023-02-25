@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
                 return MyBottomNavigationBar();
               }
             }
-            return HomePage();
+            return LogInPage();
           }),
     );
   }

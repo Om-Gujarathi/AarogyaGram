@@ -61,9 +61,9 @@ class EmergencyContacts extends StatelessWidget {
                 title: Text('Police',
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                subtitle: Text('555', style: TextStyle(fontSize: 15)),
+                subtitle: Text('100', style: TextStyle(fontSize: 15)),
                 trailing: Icon(Icons.phone),
-                onTap: () => launch("tel://555"),
+                onTap: () => launch("tel://100"),
               ),
             ),
             SizedBox(

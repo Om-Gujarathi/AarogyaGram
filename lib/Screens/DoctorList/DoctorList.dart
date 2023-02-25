@@ -84,7 +84,7 @@ class _DoctorListState extends State<DoctorList> {
                               child: Container(
                                 margin: EdgeInsets.all(15),
                                 height:
-                                    MediaQuery.of(context).size.height * 0.28,
+                                    MediaQuery.of(context).size.height * 0.2,
                                 decoration: BoxDecoration(
                                     color: kLighterGreen,
                                     //  Color(0xFF7553F6),

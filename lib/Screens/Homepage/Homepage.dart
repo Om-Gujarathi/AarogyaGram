@@ -134,14 +134,17 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       Column(
                                         children: [
-                                          Text(
-                                            "${hospitaldetails[index].Hospitalname}",
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
+                                          SizedBox(
+                                            width : 100,
+                                            child: Text(
+                                              "${hospitaldetails[index].Hospitalname}",
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              softWrap: true,
                                             ),
-                                            softWrap: true,
                                           ),
                                           Text(
                                             "General Hospital",

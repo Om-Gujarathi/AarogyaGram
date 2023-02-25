@@ -28,7 +28,7 @@ class _VideoScreenState extends State<VideoScreen> {
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           return Container(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(4.0),
             child: Stack(
               children: [
                 VideoPlayerItem(videoUrl: widget.videoUrl[index]),
