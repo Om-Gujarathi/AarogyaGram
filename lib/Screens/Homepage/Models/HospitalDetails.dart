@@ -1,5 +1,9 @@
 class Hospitaldetails {
   String? Hospitalname;
   String? Hospitalimg;
-  Hospitaldetails({required this.Hospitalname, required this.Hospitalimg});
+  String? Address;
+  Hospitaldetails(
+      {required this.Hospitalname,
+      required this.Hospitalimg,
+      required this.Address});
 }

@@ -1,5 +1,9 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vjti/Modals/Doctors.dart';
 
 import '../Modals/RUser.dart';
@@ -7,6 +11,7 @@ import '../Modals/Slots.dart';
 
 class FirestoreServices {
   final FirebaseFirestore _dataBase = FirebaseFirestore.instance;
+  final FirebaseStorage fs = FirebaseStorage.instance;
 
   Future<RUser> uidToRUser(String uid) async {
     DocumentSnapshot? rUserDoc;
@@ -140,4 +145,42 @@ class FirestoreServices {
           "available": isAvailable
         }, value.id);
       });
+
+  Future<void> storage(String uid, XFile video) async {
+    Reference rootRef = fs.ref();
+    Reference videoFolderRef =
+        rootRef.child('videos').child("video${Random().nextInt(100)}");
+    final metadata = SettableMetadata(
+      contentType: 'video/mp4',
+    );
+    TaskSnapshot ut =
+        await videoFolderRef.putFile(File(video.path), metadata);
+
+    String uri = await ut.ref.getDownloadURL();
+    addVideoUrl(uri);
+    print("URL IS : " + uri);
+  }
+
+  void addVideoUrl(String url) {
+    _dataBase.collection('videos').add({"videourl": url});
+  }
+
+  Future<List<String>> getVideoUrls() async {
+    print("HELLO");
+    List<String> videos = List.empty(growable: true);
+
+    final Stream<QuerySnapshot> _videoStream =
+        _dataBase.collection('videos').snapshots();
+    int i = 0;
+    _videoStream.forEach((element) {
+      element.docs.forEach((element) {
+        // print("EUU");
+        // videos[i++] = element.get('videourl');
+        // videos.add(element.get('videourl'));
+        videos.add(element.get('videourl'));
+      });
+    });
+    print(videos.length);
+    return videos;
+  }
 }

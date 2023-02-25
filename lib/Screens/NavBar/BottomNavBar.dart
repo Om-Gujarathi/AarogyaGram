@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:vjti/Screens/AppointmentScreen/AppointmentScreen.dart';
+import 'package:vjti/Screens/Homepage/Homepage.dart';
+import 'package:vjti/Screens/Reels/WatchReels.dart';
 import 'package:vjti/utils/medicine_reminder.dart';
 
 import '../../utils/doctor_details.dart';
@@ -12,7 +13,13 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[    AddReminderPage(),    DoctorAppointmentScreen(),    Medicine_Reminder(),    AddReminderPage(),    DoctorDetailsInputScreen(),  ];
+  final List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    DoctorAppointmentScreen(),
+    Reels(),
+    AddReminderPage(),
+    DoctorDetailsInputScreen(),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -32,10 +39,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.search),
+          //   label: 'Search',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             label: 'Notifications',

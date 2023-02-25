@@ -48,20 +48,13 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               final RUser? rUser = snapshot.data;
               if (snapshot.data!.role == "P") {
-                return PatientDetails();
-                // return DoctorAppointmentScreen();
+                return MyBottomNavigationBar();
               } else if (snapshot.data!.role == "D") {
-                // return EntryPoint(rUser: rUser!);
-                // return Container();
-                return HomePage();
+                return MyBottomNavigationBar();
               }
             }
-            // return const LogInPage();
             return HomePage();
           }),
-      // home: Scaffold(
-      //   body: Center(child: Text('HI')),
-      // ),
     );
   }
 }
