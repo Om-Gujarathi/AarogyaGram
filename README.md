@@ -14,6 +14,10 @@ The app also includes an emergency call system, which enables users to call for 
 Overall, the Rural Healthcare Application is a useful tool for improving healthcare access and services in rural areas. By providing users with easy-to-use features such as appointment booking, health awareness videos, medication reminders, and emergency call systems, the app aims to improve the health and well-being of people in rural areas.
 
 
+## Presentation Slides Link
+
+-   [PPT](https://www.canva.com/design/DAFYLSDAV0Y/Fc0N8kqaJrzmQSjisHlP7Q/view?utm_content=DAFYLSDAV0Y&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ## Screenshots/Demo
 
 
