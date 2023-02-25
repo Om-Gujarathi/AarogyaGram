@@ -6,11 +6,7 @@ import 'package:vjti/Screens/AuthenticationScreens/LogInScreen.dart';
 import 'package:vjti/Screens/Doctor%20Notification/DocNotif.dart';
 import 'package:vjti/Screens/Homepage/Homepage.dart';
 import 'package:vjti/Screens/NavBar/BottomNavBar.dart';
-<<<<<<< HEAD
 import 'package:vjti/Services/FirestoreServices.dart';
-=======
-import 'package:vjti/utils/navbar.dart';
->>>>>>> 663a5541875cc447a502ce429dc120791a3538e8
 
 import 'Modals/RUser.dart';
 import 'Screens/DoctorList/DoctorList.dart';
@@ -53,10 +49,6 @@ class MyApp extends StatelessWidget {
               final RUser? rUser = snapshot.data;
               if (snapshot.data!.role == "P") {
                 return MyBottomNavigationBar();
-<<<<<<< HEAD
-=======
-                // return DoctorAppointmentScreen();
->>>>>>> 663a5541875cc447a502ce429dc120791a3538e8
               } else if (snapshot.data!.role == "D") {
                 return MyBottomNavigationBar();
               }

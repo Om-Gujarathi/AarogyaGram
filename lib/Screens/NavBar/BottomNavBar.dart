@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vjti/Screens/AppointmentScreen/AppointmentScreen.dart';
 import 'package:vjti/Screens/Homepage/Homepage.dart';
 import 'package:vjti/Screens/Reels/WatchReels.dart';
 import 'package:vjti/utils/medicine_reminder.dart';
+import 'package:vjti/utils/emergency_screen.dart';
 
-import '../../Modals/Doctors.dart';
 import '../../utils/doctor_details.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -16,10 +15,9 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    // DoctorAppointmentScreen(doctor: ),
-
+    EmergencyContacts(),
     Reels(),
-    AddReminderPage(),
+    // AddReminderPage(),
     DoctorDetailsInputScreen(),
   ];
 

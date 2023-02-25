@@ -26,16 +26,11 @@ dependencies:
   permission_handler: ^9.0.0
   permission_handler_android: ^9.0.2+1
   flutter_local_notifications: ^13.0.0
-<<<<<<< HEAD
   shared_preferences: ^2.0.18
   international_phone_number: ^0.0.1
   url_launcher: ^6.1.10
   image_picker: ^0.8.6+3
   video_player: ^2.5.2
-=======
-  shared_preferences: ^2.0.5
-  url_launcher: ^6.1.10
->>>>>>> 663a5541875cc447a502ce429dc120791a3538e8
 
 dev_dependencies:
   flutter_test:

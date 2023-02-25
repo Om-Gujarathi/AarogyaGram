@@ -276,12 +276,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             child: ElevatedButton(
                                 onPressed: () async {
-                                  if (await canLaunch(
-                                      '${pharma[index].site}')) {
-                                    launch('${pharma[index].site}');
-                                  } else {
-                                    throw 'Could not launch ${pharma[index].site}';
-                                  }
+                                  launch('${pharma[index].site}');
                                 },
                                 child: Image.asset("${pharma[index].img}")),
                           );
