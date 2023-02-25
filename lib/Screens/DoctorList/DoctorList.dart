@@ -80,18 +80,19 @@ class _DoctorListState extends State<DoctorList> {
               ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    // Stream for a particular speciality of doctors
                     stream: FirestoreServices().getDoctors("Sexologist"),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        // making snapshots into a list of Qsnaps
                         List<QueryDocumentSnapshot<Map<String, dynamic>>>
                             docList = snapshot.data!.docs;
 
                         return ListView.builder(
                           itemCount: snapshot.data!.size,
                           itemBuilder: ((context, index) {
-                            Doctor doc = Doctor.fromJSON(
-                              docList[index].data(),
-                                docList[index].data()["uid"]);
+                            Doctor doc = Doctor.fromJSON(docList[index].data(),
+                                docList[index].data()["doctorUID"]);
                             return Container(
                               margin: EdgeInsets.all(15),
                               height: MediaQuery.of(context).size.height * 0.28,

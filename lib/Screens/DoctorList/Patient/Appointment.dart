@@ -5,6 +5,7 @@ import 'package:vjti/Screens/DoctorList/DoctorList.dart';
 import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:vjti/Services/FirestoreServices.dart';
 
 class PatientDetails extends StatefulWidget {
   const PatientDetails({super.key});
@@ -24,7 +25,8 @@ class _PatientDetailsState extends State<PatientDetails> {
       home: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            shadowColor: Colors.white,
+            elevation: 0,
+            // shadowColor: Colors.white,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
@@ -74,8 +76,12 @@ class _PatientDetailsState extends State<PatientDetails> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: TextField(
                       decoration: InputDecoration(
-                          hintText: "Eg:- Firstname Middlename Lastname",
-                          hintStyle: TextStyle(color: Colors.grey[700])),
+                        border: OutlineInputBorder(),
+                        hintText: "Firstname Middlename Lastname",
+                        // hintStyle: TextStyle(
+                        //   color: Colors.grey[700],
+                        // ),
+                      ),
                     ),
                   ),
                   Padding(
@@ -98,17 +104,16 @@ class _PatientDetailsState extends State<PatientDetails> {
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      AgeButton(
-                        color1: color1,
-                        color2: color2,
-                        Age: 10,
-                      ),
-                      AgeButton(color1: color1, color2: color2, Age: 18),
-                      AgeButton(color1: color1, color2: color2, Age: 30),
-                      AgeButton(color1: color1, color2: color2, Age: 40),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        AgeButton(color1: color1, color2: color2, Age: 10),
+                        AgeButton(color1: color1, color2: color2, Age: 18),
+                        AgeButton(color1: color1, color2: color2, Age: 30),
+                        AgeButton(color1: color1, color2: color2, Age: 40),
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -232,8 +237,11 @@ class _PatientDetailsState extends State<PatientDetails> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: color2, foregroundColor: color1),
-                          onPressed: () {},
-                          child: Text("Continue")))
+                          onPressed: () {
+                            // TODO take inputs and fill out the following the appointment will be set
+                            // FirestoreServices().bookAppointment(doctorUID, slot.time, patientData, rUserPatientUID)
+                          },
+                          child: Text("Book Appointment")))
                 ],
               ),
             ),
@@ -261,6 +269,7 @@ class AgeButton extends StatefulWidget {
 
 class _AgeButtonState extends State<AgeButton> {
   bool istapped = false;
+
   var color_primary = kLighterGreen;
   var color_secondary = kGreenishBlue;
 

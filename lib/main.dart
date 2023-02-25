@@ -10,6 +10,7 @@ import 'package:vjti/Services/FirestoreServices.dart';
 
 import 'Modals/RUser.dart';
 import 'Screens/DoctorList/DoctorList.dart';
+import 'Screens/DoctorList/Patient/Appointment.dart';
 import 'Services/Authservices.dart';
 
 Future<void> main() async {
@@ -47,17 +48,9 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               final RUser? rUser = snapshot.data;
               if (snapshot.data!.role == "P") {
-                // FirestoreServices().createDoctor(
-                //     "uid",
-                //     "Name of dr",
-                //     "Name of Hospital",
-                //     12,
-                //     "Sexologist",
-                //     "URL of any image of dr");
-                // return Container();
-                return DoctorList();
+                return PatientDetails();
                 // return DoctorAppointmentScreen();
-              } else if (snapshot.data!.role == "C") {
+              } else if (snapshot.data!.role == "D") {
                 // return EntryPoint(rUser: rUser!);
                 // return Container();
                 return HomePage();

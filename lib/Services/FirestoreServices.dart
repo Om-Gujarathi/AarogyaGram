@@ -40,7 +40,7 @@ class FirestoreServices {
       _dataBase
           .collection("appointments")
           .where("doctorUID", isEqualTo: doctorUID)
-          .where("appointmentCompleted", isEqualTo: false)
+          .where("isCompleted", isEqualTo: false)
           // .orderBy("time", descending: isDescending)
           .snapshots();
 
