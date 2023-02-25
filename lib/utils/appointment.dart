@@ -11,7 +11,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: kWhite,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: [
