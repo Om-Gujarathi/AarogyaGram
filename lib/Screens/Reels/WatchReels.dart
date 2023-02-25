@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -40,12 +39,13 @@ class Reels extends StatelessWidget {
           ElevatedButton(
               onPressed: () async {
                 print("PRESSED");
-                List<String> videos = await _firestoreServices.getVideoUrls();
-                print(videos);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => VideoScreen(videoUrl: videos)));
+                List<dynamic> videos = await _firestoreServices.getVideoUrls();
+                if (videos.isNotEmpty) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VideoScreen(videoUrl: videos)));
+                }
               },
               child: Text('SEE REELS')),
         ],
