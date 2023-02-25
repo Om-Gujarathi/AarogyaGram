@@ -153,8 +153,7 @@ class FirestoreServices {
     final metadata = SettableMetadata(
       contentType: 'video/mp4',
     );
-    TaskSnapshot ut =
-        await videoFolderRef.putFile(File(video.path), metadata);
+    TaskSnapshot ut = await videoFolderRef.putFile(File(video.path), metadata);
 
     String uri = await ut.ref.getDownloadURL();
     addVideoUrl(uri);
@@ -165,21 +164,29 @@ class FirestoreServices {
     _dataBase.collection('videos').add({"videourl": url});
   }
 
-  Future<List<String>> getVideoUrls() async {
+  Future<List<dynamic>> getVideoUrls() async {
     print("HELLO");
-    List<String> videos = List.empty(growable: true);
+    List<dynamic> videos = List.empty(growable: true);
+    final doc =
+        await _dataBase.collection("videos").doc("DmYYux1atb200zz23heb").get();
+    print(doc.data());
+    videos = doc.data()!["videourl"];
 
-    final Stream<QuerySnapshot> _videoStream =
-        _dataBase.collection('videos').snapshots();
-    int i = 0;
-    _videoStream.forEach((element) {
-      element.docs.forEach((element) {
-        // print("EUU");
-        // videos[i++] = element.get('videourl');
-        // videos.add(element.get('videourl'));
-        videos.add(element.get('videourl'));
-      });
-    });
+    // final _videoStream = _dataBase.collection('videos').snapshots().map(
+    //       (event) => event.docs.map((e) async {
+    //         print(e.data());
+    //         videos.add(await e.data()["videourl"]);
+    //       }),
+    //     );
+    // int i = 0;
+    // _videoStream.forEach((element) {
+    //   element.docs.forEach((element) {
+    //     // print("EUU");
+    //     // videos[i++] = element.get('videourl');
+    //     // videos.add(element.get('videourl'));
+    //     videos.add(element.get('videourl'));
+    //   });
+    // });
     print(videos.length);
     return videos;
   }

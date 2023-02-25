@@ -7,7 +7,6 @@ import 'package:vjti/Screens/Doctor%20Notification/DocNotif.dart';
 import 'package:vjti/Screens/Homepage/Homepage.dart';
 import 'package:vjti/Screens/NavBar/BottomNavBar.dart';
 import 'package:vjti/Services/FirestoreServices.dart';
-
 import 'Modals/RUser.dart';
 import 'Screens/DoctorList/DoctorList.dart';
 import 'Screens/DoctorList/Patient/Appointment.dart';
