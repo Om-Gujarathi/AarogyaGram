@@ -216,7 +216,9 @@ class _HomePageState extends State<HomePage> {
                                 IconButton(
                                   onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute(builder: (context) {
-                                    return DoctorList();
+                                    return DoctorList(
+                                      specialisation: Spec[index].spec!,
+                                    );
                                   })),
                                   icon: Image.asset(
                                     '${Spec[index].url}',
@@ -278,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                                       '${pharma[index].site}')) {
                                     launch('${pharma[index].site}');
                                   } else {
-                                    throw 'Could not launch https://www.example.com';
+                                    throw 'Could not launch ${pharma[index].site}';
                                   }
                                 },
                                 child: Image.asset("${pharma[index].img}")),

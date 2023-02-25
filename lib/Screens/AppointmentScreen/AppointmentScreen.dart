@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:vjti/Modals/Doctors.dart';
 
 import '../../Modals/Slots.dart';
 import '../../Services/FirestoreServices.dart';
+import '../DoctorList/Patient/Appointment.dart';
 import 'Utils/SlotsCard.dart';
 
 class DoctorAppointmentScreen extends StatelessWidget {
+  final Doctor doctor;
   Slot? _selectedSlot;
-  DoctorAppointmentScreen({Key? key}) : super(key: key);
+  DoctorAppointmentScreen({Key? key, required this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +23,6 @@ class DoctorAppointmentScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 2.2,
               decoration: const BoxDecoration(
-                  // image: DecorationImage(
-                  //     image: AssetImage("assets/images/doctor.jpg"),
-                  //     fit: BoxFit.cover),
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(20),
                       bottomLeft: Radius.circular(20))),
@@ -45,6 +45,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               // TODO: Implement the back navigation
+                              Navigator.pop(context);
                             },
                             child: Icon(
                               Icons.arrow_back,
@@ -89,7 +90,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Text(
                                 "Experience",
                                 style: TextStyle(
@@ -99,7 +100,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                                 height: 8,
                               ),
                               Text(
-                                "10 years",
+                                "${doctor.Experience} years",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
@@ -139,7 +140,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "DOCTOR'S NAME",
+                    doctor.Name!,
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 28,
@@ -149,7 +150,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                     height: 5,
                   ),
                   Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.monitor_heart,
                         color: Colors.red,
@@ -159,7 +160,7 @@ class DoctorAppointmentScreen extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        "Which type of doctor?",
+                        doctor.Specialisation!,
                         style: TextStyle(
                             fontSize: 17,
                             color: Colors.black,
@@ -170,20 +171,11 @@ class DoctorAppointmentScreen extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    "Address of the doctor's clinic or the hospital address",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black),
-                    textAlign: TextAlign.justify,
-                  ),
                   const SizedBox(
                     height: 28,
                   ),
                   StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: FirestoreServices()
-                          .getSlots("53OaamMvIXhUzbZqWn5b41JMmAg2"),
+                      stream: FirestoreServices().getSlots(doctor.uid!),
                       builder: (context, snapshot) {
                         QuerySnapshot<Map<String, dynamic>> data =
                             snapshot.data!;
@@ -276,27 +268,27 @@ class DoctorAppointmentScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     child: InkWell(
                       onTap: () {
-                        // FirestoreServices().addDoctorInHospital(
-                        //     "4v1ym2pn9FZM57lclqOt", "doctorUID");
-
-                        // FirestoreServices().createHostipal(
-                        //     "53OaamMvIXhUzbZqWn5b41JMmAg2", "hospitalName", 9.3, 6.9);
+                        if (_selectedSlot == null) {
+                          SnackBar(
+                            content: Text("No slot selected"),
+                            // content: Text(
+                            //     "Laudya Slots tuza baap select karnar ka?"),
+                          );
+                          return;
+                        }
                         try {
-                          // FirestoreServices().bookAppointment(
-                          //     "53OaamMvIXhUzbZqWn5b41JMmAg2",
-                          //     _selectedSlot!.time,
-                          //     "F1mbNyLR1lUuV0AYAEfimqSgJrF3",
-                          //     false);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Container(),
+                              builder: (context) => PatientDetails(
+                                doctor: doctor,
+                                slot: _selectedSlot!,
+                              ),
                             ),
                           );
                         } on Exception catch (e) {
                           throw e;
                         }
-// TODO: Navigate to the payment screen or if no payment screen then a dialog box that appointment booked
                       },
                       child: SizedBox(
                         height: 60,
@@ -320,4 +312,3 @@ class DoctorAppointmentScreen extends StatelessWidget {
     );
   }
 }
-

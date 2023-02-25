@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vjti/Colors/color.dart';
 import 'package:vjti/Screens/Doctor%20Notification/Medication.dart';
-import 'package:vjti/Screens/DoctorList/Patient/Appointment.dart';
 
 class DocNotification extends StatefulWidget {
   const DocNotification({super.key});

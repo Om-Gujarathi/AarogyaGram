@@ -1,14 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:vjti/Colors/color.dart';
-import 'package:vjti/Screens/DoctorList/DoctorList.dart';
 import 'package:flutter/material.dart';
 import 'package:gender_picker/gender_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:vjti/Services/FirestoreServices.dart';
+
+import '../../../Modals/Doctors.dart';
+import '../../../Modals/Slots.dart';
 
 class PatientDetails extends StatefulWidget {
-  const PatientDetails({super.key});
+  final Slot slot;
+  final Doctor doctor;
+  const PatientDetails({super.key, required this.slot,required this.doctor});
 
   @override
   State<PatientDetails> createState() => _PatientDetailsState();
@@ -26,16 +29,6 @@ class _PatientDetailsState extends State<PatientDetails> {
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            // shadowColor: Colors.white,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.grey,
-                size: 25,
-              ),
-              onPressed: () => Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => DoctorList())),
-            ),
             title: Text(
               "Patient's Details",
               style: TextStyle(

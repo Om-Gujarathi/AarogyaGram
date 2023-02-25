@@ -6,44 +6,21 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vjti/Colors/color.dart';
 import 'package:vjti/Screens/AppointmentScreen/AppointmentScreen.dart';
+import 'package:vjti/Screens/Homepage/Models/specialisation.dart';
 import 'package:vjti/Services/FirestoreServices.dart';
 import '../../Modals/Doctors.dart';
 
 import 'package:flutter/material.dart';
 
 class DoctorList extends StatefulWidget {
-  const DoctorList({super.key});
+  const DoctorList({super.key, required this.specialisation});
+  final String specialisation;
 
   @override
   State<DoctorList> createState() => _DoctorListState();
 }
 
 class _DoctorListState extends State<DoctorList> {
-  // final List<String> _items = ["Archit", "Archit", "Archit"];
-
-  // List<Doctors> doc = [
-  //   Doctors("Dr. Archit K", 4, "Physiotherapist", "Sinhgad Hospital",
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxUJ_kOh-4mPOy2oYS6a7fe6gNfuF17uM61Q&usqp=CAU"),
-  //   Doctors("Dr. Sheetal", 3, "Cardiologist", "Deenanath Hospital",
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7_jlk_CHax5EgR5RuKXskRxJi6jTrf_a5jK0inaEzkrO99r7klaHvGz_yEVeApgh7On4&usqp=CAU"),
-  //   Doctors("Dr. Archit K", 5, "Physiotherapist", "AK Clinic",
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5HKYSiWWJJUfj3pU3g6trGaxnbPj5pADrKQ&usqp=CAU"),
-  //   Doctors("Dr. Archit K", 1, "Physiotherapist", "AK Clinic",
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxUJ_kOh-4mPOy2oYS6a7fe6gNfuF17uM61Q&usqp=CAU"),
-  //   Doctors("Dr. Archit K", 2, "Physiotherapist", "AK Clinic",
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxUJ_kOh-4mPOy2oYS6a7fe6gNfuF17uM61Q&usqp=CAU")
-  // ];
-
-  // void updateSearchlist(String value) {
-  //   //Fucntion to filter our searches
-  //   setState(() {
-  //     diaplaylist = doc
-  //         .where((element) =>
-  //             element.Specialisation!.toLowerCase().contains(value.toString()))
-  //         .toList();
-  //   });
-  // }
-
   double? _rating;
   final GlobalKey<AnimatedListState> _key = GlobalKey();
 
@@ -81,7 +58,8 @@ class _DoctorListState extends State<DoctorList> {
               Expanded(
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                     // Stream for a particular speciality of doctors
-                    stream: FirestoreServices().getDoctors("Sexologist"),
+                    stream:
+                        FirestoreServices().getDoctors(widget.specialisation),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         // making snapshots into a list of Qsnaps
@@ -93,143 +71,157 @@ class _DoctorListState extends State<DoctorList> {
                           itemBuilder: ((context, index) {
                             Doctor doc = Doctor.fromJSON(docList[index].data(),
                                 docList[index].data()["doctorUID"]);
-                            return Container(
-                              margin: EdgeInsets.all(15),
-                              height: MediaQuery.of(context).size.height * 0.28,
-                              decoration: BoxDecoration(
-                                  color: kLighterGreen,
-                                  //  Color(0xFF7553F6),
-                                  borderRadius: BorderRadius.circular(24)),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.1,
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DoctorAppointmentScreen(doctor: doc),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(15),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.28,
+                                decoration: BoxDecoration(
+                                    color: kLighterGreen,
+                                    //  Color(0xFF7553F6),
+                                    borderRadius: BorderRadius.circular(24)),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.1,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.18,
+                                              decoration: BoxDecoration(
+                                                // color: Colors.bl'ack,
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                      "${doc.Photo}"),
+                                                ),
+                                              )),
+                                          SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.18,
-                                            decoration: BoxDecoration(
-                                              // color: Colors.bl'ack,
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: NetworkImage(
-                                                      "${doc.Photo}")),
-                                            )),
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.04,
-                                        ),
-                                        Column(children: [
-                                          Text(
-                                            "${doc.Name}",
-                                            style: TextStyle(
-                                                color: kDarkBlue,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold),
+                                                0.04,
                                           ),
-                                          Text(
-                                            "${doc.Specialisation}",
-                                            style: TextStyle(
-                                                color: kDarkBlue, fontSize: 15),
-                                          ),
-                                          Text(
-                                            "${doc.Hospital_Name}",
-                                            style: TextStyle(
-                                              color: kDarkBlue,
-                                              fontSize: 13,
+                                          Column(children: [
+                                            Text(
+                                              "${doc.Name}",
+                                              style: TextStyle(
+                                                  color: kDarkBlue,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
                                             ),
-                                          ),
-                                          RatingBar.builder(
-                                              initialRating: 2,
-                                              minRating: 1,
-                                              itemCount: 5,
-                                              itemPadding: EdgeInsets.all(2),
-                                              itemSize: 20,
-                                              itemBuilder: (context, index) =>
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.amber,
+                                            Text(
+                                              "${doc.Specialisation}",
+                                              style: TextStyle(
+                                                  color: kDarkBlue,
+                                                  fontSize: 15),
+                                            ),
+                                            Text(
+                                              "${doc.Hospital_Name}",
+                                              style: TextStyle(
+                                                color: kDarkBlue,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                            RatingBar.builder(
+                                                initialRating: 2,
+                                                minRating: 1,
+                                                itemCount: 5,
+                                                itemPadding: EdgeInsets.all(2),
+                                                itemSize: 20,
+                                                itemBuilder: (context, index) =>
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
+                                                    ),
+                                                onRatingUpdate: (rating) =>
+                                                    debugPrint(
+                                                        rating.toString())),
+                                          ]),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: kDarkBlue,
+                                    ),
+                                    // Text(
+                                    //   "_______________________________________________________________________",
+                                    //   style:
+                                    //       TextStyle(color: Colors.grey, fontSize: 10),
+                                    // ),
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              40, 8, 5, 0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Available Now",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: kDarkBlue),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  FaIcon(
+                                                    FontAwesomeIcons.video,
+                                                    size: 14,
+                                                    color: Color.fromARGB(
+                                                        255, 58, 180, 62),
                                                   ),
-                                              onRatingUpdate: (rating) =>
-                                                  debugPrint(
-                                                      rating.toString())),
-                                        ]),
+                                                  Text(
+                                                    "  Video Call",
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: kDarkBlue),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     ),
-                                  ),
-                                  Divider(
-                                    color: kDarkBlue,
-                                  ),
-                                  // Text(
-                                  //   "_______________________________________________________________________",
-                                  //   style:
-                                  //       TextStyle(color: Colors.grey, fontSize: 10),
-                                  // ),
-                                  Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            40, 8, 5, 0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Available Now",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: kDarkBlue),
-                                            ),
-                                            Row(
-                                              children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons.video,
-                                                  size: 14,
-                                                  color: Color.fromARGB(
-                                                      255, 58, 180, 62),
-                                                ),
-                                                Text(
-                                                  "  Video Call",
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: kDarkBlue),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  // ElevatedButton(
-                                  //     style: ElevatedButton.styleFrom(
-                                  //         backgroundColor: kDarkBlue,
-                                  //         shape: RoundedRectangleBorder(
-                                  //             borderRadius:
-                                  //                 BorderRadius.circular(20))),
-                                  //     onPressed: () => Navigator.of(context).push(
-                                  //         MaterialPageRoute(
-                                  //             builder: (context) =>
-                                  //                 DoctorAppointmentScreen())),
-                                  //     child: Text(
-                                  //       "Book Appointment",
-                                  //       style: TextStyle(fontSize: 20),
-                                  //     ))
-                                ],
+                                    // ElevatedButton(
+                                    //     style: ElevatedButton.styleFrom(
+                                    //         backgroundColor: kDarkBlue,
+                                    //         shape: RoundedRectangleBorder(
+                                    //             borderRadius:
+                                    //                 BorderRadius.circular(20))),
+                                    //     onPressed: () => Navigator.of(context).push(
+                                    //         MaterialPageRoute(
+                                    //             builder: (context) =>
+                                    //                 DoctorAppointmentScreen())),
+                                    //     child: Text(
+                                    //       "Book Appointment",
+                                    //       style: TextStyle(fontSize: 20),
+                                    //     ))
+                                  ],
+                                ),
                               ),
                             );
                           }),

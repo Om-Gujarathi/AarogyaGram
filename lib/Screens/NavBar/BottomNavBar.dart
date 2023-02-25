@@ -4,6 +4,7 @@ import 'package:vjti/Screens/Homepage/Homepage.dart';
 import 'package:vjti/Screens/Reels/WatchReels.dart';
 import 'package:vjti/utils/medicine_reminder.dart';
 
+import '../../Modals/Doctors.dart';
 import '../../utils/doctor_details.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -15,7 +16,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    DoctorAppointmentScreen(),
+    // DoctorAppointmentScreen(doctor: ),
+
     Reels(),
     AddReminderPage(),
     DoctorDetailsInputScreen(),
@@ -44,16 +46,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           //   label: 'Search',
           // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
+            icon: Icon(Icons.emergency),
+            label: 'Emergency',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.play_arrow),
+            label: 'Awareness',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.alarm),
+            label: 'Reminders',
           ),
         ],
         currentIndex: _selectedIndex,
